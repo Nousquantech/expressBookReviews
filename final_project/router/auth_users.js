@@ -80,14 +80,14 @@ regd_users.delete("/auth/review/:isbn", (req, res) => {
     
     let book = books[isbn]; 
     if (book) {  // Check if friend exists
-        if (username && review) {
-            book["reviews"]["username"]["review"] = review;
-            books[isbn] = book
+        if (username) {
+            delete book["reviews"]["username"]["review"]
+
         }
-        res.send(`Review for book with isbn ${isbn} updated.`);
+        res.send(`Review for book with isbn ${isbn} deleted.`);
     } else {
         // Respond if friend with specified email is not found
-        res.send("Unable to add review!");
+        res.send("Unable to delete review!");
     }
 
 });
